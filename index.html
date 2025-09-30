@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>أكاديمية الأمن السيبراني — SPCK Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">أكاديمية الأمن السيبراني</div>
+    <nav class="nav">
+      <a href="#" onclick="showView('home')">الرئيسية</a>
+      <a href="#" onclick="showView('courses')">الدورات</a>
+      <a href="#" onclick="showView('assistant')">مساعد تعليمي</a>
+      <a href="#" onclick="showView('labs')">مختبرات آمنة</a>
+      <a href="#" onclick="showView('profile')">حسابي</a>
+    </nav>
+    <div class="auth-area" id="authArea">
+      <button onclick="showLogin()">تسجيل / دخول</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- HOME -->
+    <section id="home" class="view">
+      <section class="hero">
+        <h1>تعلم Kali Linux · Bug Bounty · أمن التطبيقات</h1>
+        <p>دورات عملية، مختبرات معزولة (محاكاة) ونظام إدارة دورات مبسّط — مصمّم من Ghost dev .</p>
+        <div class="cta">
+          <button onclick="showView('courses')">ابدأ التعلم</button>
+          <button onclick="showView('assistant')">تحدث مع المساعد</button>
+        </div>
+      </section>
+
+      <section class="featured">
+        <h2>دورات مميزة</h2>
+        <div id="featuredList" class="cards"></div>
+      </section>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses" class="view" style="display:none;">
+      <div class="toolbar">
+        <h2>قائمة الدورات</h2>
+        <div>
+          <button onclick="renderCourses()">تحديث</button>
+          <button onclick="showCreateCourse()">إنشاء دورة (Instructor/Admin)</button>
+        </div>
+      </div>
+      <div id="courseList" class="cards"></div>
+    </section>
+
+    <!-- ASSISTANT (محاكاة) -->
+    <section id="assistant" class="view" style="display:none;">
+      <h2>مساعد تعليمي (محاكاة محليّة)</h2>
+      <div class="assistant">
+        <div id="chatLog" class="chatlog"></div>
+        <div class="chatbox">
+          <input id="chatInput" placeholder="اسأل عن Kali, أدوات، طرق التعلم..." onkeydown="if(event.key==='Enter') assistantSend()" />
+          <button onclick="assistantSend()">أرسل</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LABS -->
+    <section id="labs" class="view" style="display:none;">
+      <h2>مختبرات آمنة — محاكاة تيرمنال</h2>
+      <p>بيئة تعليمية محاكية لعرض أوامر ومخرجات دون أي تأثير حقيقي.</p>
+      <div class="lab-grid">
+        <div class="lab-card">
+          <h3>Lab: أوامر Kali الأساسية</h3>
+          <button onclick="openLab('kali')">افتح المحاكاة</button>
+        </div>
+        <div class="lab-card">
+          <h3>Lab: نموذج Bug Bounty (مفهوم)</h3>
+          <button onclick="openLab('bug')">افتح المحاكاة</button>
+        </div>
+      </div>
+      <div id="terminal" class="terminal" style="display:none;">
+        <div class="terminal-header">
+          <span id="termTitle">TERMINAL</span>
+          <button onclick="closeTerminal()">X</button>
+        </div>
+        <div id="termOut" class="term-out"></div>
+        <div class="term-in">
+          <input id="termInput" placeholder="اكتب أمرًا تجريبيًا" onkeydown="if(event.key==='Enter') runTermCmd()" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="view" style="display:none;">
+      <h2>حسابي</h2>
+      <div id="profileArea"></div>
+      <div id="progressArea"></div>
+      <div id="certArea"></div>
+    </section>
+  </main>
+
+  <!-- modal area -->
+  <div id="modal" class="modal" style="display:none;"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
